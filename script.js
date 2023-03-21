@@ -26,6 +26,33 @@ function getRandomSymbol() {
   return symbols[Math.floor(Math.random()* symbols.length)];
 }
 
+let numberOfCharacters=5;
+
+
+function generatePassword() {
+  let password="";
+  for (i=0; i<numberOfCharacters; i++) {
+    var key=Math.floor(Math.random()*4);
+    let newLetter=''
+    if (key==0) {
+      newLetter=getRandomLower();
+    }
+    else if (key==1) {
+      newLetter=getRandomUpper();
+    }
+    else if (key==2) {
+      newLetter=getRandomNumber();
+    }
+    else if (key==3) {
+      newLetter=getRandomSymbol();
+    }
+
+    password = `${password}${newLetter}`
+  }
+  
+  return password;
+}
+
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
