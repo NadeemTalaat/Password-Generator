@@ -2,6 +2,9 @@
 var generateBtn = document.querySelector("#generate");
 
 
+let numberOfCharacters=5;
+
+
 // The following code was sourced from Travery Media (https://www.youtube.com/watch?v=duNmhKgtcsI)
 
 // Declare function to get random lowercase character
@@ -25,9 +28,6 @@ function getRandomSymbol() {
   const symbols = '!"#$%&()*+,-./;:<=>?@[]^_`{}|~';
   return symbols[Math.floor(Math.random()* symbols.length)];
 }
-
-let numberOfCharacters=5;
-
 
 function generatePassword() {
   let password="";
