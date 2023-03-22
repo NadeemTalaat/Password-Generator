@@ -29,24 +29,44 @@ var useSpecial = confirm("Should the password include special characters? OK=Yes
 
 // Declare function to get random lowercase character
 function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  if (useLower) {
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
+  }
+  else if (useLower==false) {
+    return '';
+  }
 }
 
 // Declare function to get random uppercase character
 function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+  if (useUpper) {
+    return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
+  }
+  else if (useUpper==false) {
+    return '';
+  }
 }
 
 // Declare function to get random number
 function getRandomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  if (useNumbers){
+    return String.fromCharCode(Math.floor(Math.random() * 10) + 48);
+  }
+  else if (useNumbers==false) {
+    return '';
+  }
 }
 
 // Declare function to get random special character
 // List of special characters sourced from https://owasp.org/www-community/password-special-characters
 function getRandomSymbol() {
   const symbols = '!"#$%&()*+,-./;:<=>?@[]^_`{}|~';
-  return symbols[Math.floor(Math.random()* symbols.length)];
+  if (useSpecial) {
+    return symbols[Math.floor(Math.random()* symbols.length)];
+  }
+  else if (useSpecial==false) {
+    return '';
+  }
 }
 
 function getRandom() {
@@ -65,36 +85,52 @@ function getRandom() {
   }
 }
 
+// Function to shuffle a string.
+// The following code was sourced from the following link and adapted for my code's purposes. https://stackoverflow.com/questions/3079385/str-shuffle-equivalent-in-javascript
+function shufflePassword(string) {
+  var parts = string.split('');
+  for (var i = parts.length; i > 0;) {
+      var random = parseInt(Math.random() * i);
+      var temp = parts[--i];
+      parts[i] = parts[random];
+      parts[random] = temp;
+  }
+  return parts.join('');
+}
+
 function generatePassword() {
   let password="";
-  
-  for (i=0; i<numberOfCharacters; i++) {
+  key=0;
+
+  while (password.length<numberOfCharacters) {
     var lower=0;
     var upper=1;
     var number=2;
     var symbol=3;
     
     
-    let newLetter=''
-    if (i===lower) {
-      newLetter = getRandomLower();
+    var newCharacter=''
+    if (key===lower) {
+      newCharacter = getRandomLower();
     }
-    else if (i===upper) {
-      newLetter = getRandomUpper();
+    else if (key===upper) {
+      newCharacter = getRandomUpper();
     }
-    else if (i===number) {
-      newLetter = getRandomNumber()
+    else if (key===number) {
+      newCharacter = getRandomNumber()
     }
-    else if (i===symbol) {
-      newLetter = getRandomSymbol();
+    else if (key===symbol) {
+      newCharacter = getRandomSymbol();
     }
     else {
-      newLetter = getRandom();
+      newCharacter = getRandom();
     }
 
-    password = `${password}${newLetter}`
+    password = `${password}${newCharacter}`
+    key++;
   }
   
+  password = shufflePassword(password);
   return password;
 }
 
