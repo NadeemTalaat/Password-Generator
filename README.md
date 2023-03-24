@@ -3,6 +3,8 @@ A secure password generator using JavaScript.
 
 ## Description
 This web app is designed to generate a random password using specified criteria given by a user. The application receives input from the user using console prompts.
+
+I was able to learn a lot about JavaScript through this challenge. There was a lot and I mean A LOT of debugging involved but ultimately I managed to get it to work. By the end of it, I was able to get the hang of using functions and while loops.
 ## Installation
 Load index.html file to access landing page. CSS styling is external but linked within index.html page.
 ## Usage
