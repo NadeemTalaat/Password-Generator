@@ -1,29 +1,42 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// Request number of characters from user
-let numberOfCharacters = prompt("How many characters should the password have?");
+var numberOfCharacters="";
+var useLower="";
+var useUpper="";
+var useNumbers="";
+var useSpecial="";
 
-if (numberOfCharacters<8){
-  alert("Password needs to be between 8 and 128 characters");
+function getUserInput() {
+
+// Request number of characters from user
   numberOfCharacters = prompt("How many characters should the password have?");
-}
-else if (numberOfCharacters>128) {
-  alert("Password needs to be between 8 and 128 characters");
-  numberOfCharacters = prompt("How many characters should the password have?");
-}
+
+
+// Validates if the input is actually a number and between 8 to 128
+  while (true) {
+    if (!isNaN(numberOfCharacters)==true && numberOfCharacters>=8 && numberOfCharacters<=128) {
+      break;
+    }
+    else {
+    alert("Password needs to be a number between 8 & 128");
+    numberOfCharacters = prompt("How many characters should the password have?")
+    }
+  }
 
 // User input - use lowercase letters?
-var useLower = confirm("Should the password include lowercase letters? OK=Yes, Cancel=No");
+  useLower = confirm("Should the password include lowercase letters? OK=Yes, Cancel=No");
 
-// User input - use uppercase letters?
-var useUpper = confirm("Should the password include uppercase letters? OK=Yes, Cancel=No");
+  // User input - use uppercase letters?
+  useUpper = confirm("Should the password include uppercase letters? OK=Yes, Cancel=No");
 
-// User input - use numbers?
-var useNumbers = confirm("Should the password include numbers? OK=Yes, Cancel=No");
+  // User input - use numbers?
+  useNumbers = confirm("Should the password include numbers? OK=Yes, Cancel=No");
 
-// User input - use special characters?
-var useSpecial = confirm("Should the password include special characters? OK=Yes, Cancel=No");
+  // User input - use special characters?
+  useSpecial = confirm("Should the password include special characters? OK=Yes, Cancel=No");
+
+}
 
 // The following code was sourced from Travery Media (https://www.youtube.com/watch?v=duNmhKgtcsI)
 
@@ -136,6 +149,7 @@ function generatePassword() {
 
 // Write password to the #password input
 function writePassword() {
+  getUserInput();
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
